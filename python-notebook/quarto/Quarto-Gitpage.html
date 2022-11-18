@@ -147,17 +147,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output-dir</span><span class="kw">:</span><span class="at"> docs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>폴더명이 꼭 <code>docs</code>일 필요는 없다 해당폴더엔 quarto가 직접만든 배포 파일들을 모아둘뿐이다.</p>
 <p>그리고 루트에 .nojekyll파일을 생성한다.</p>
-<blockquote class="blockquote">
-<p>!왜 docs가 아웃풋폴더지? 깃허브페이지에서는 master branch /docs를 기본 페이지 노출로 사용한다</p>
-</blockquote>
 <p>github에 github page를 생성하고 (<a href="https://docs.github.com/en/pages/quickstart">가이드</a>) 작성중인 폴더에 <code>git init</code>, <code>git remote add origin {repo url}</code>을 통해 연결해준다</p>
 <p>이제 <code>quarto publish</code>를 실행하면 <code>gh-pages</code>브렌치로 자동으로 올라간다 페이지를 들어가 확인해보자 https://yomania.github.io</p>
 <p>잘나온다!!!</p>
 <p>추가적으로 작성중인 파일이 노출되는것을 피해주기위해서</p>
 <p><code>.gitignore</code>를 생성해준다</p>
 <pre><code>/.quarto/
-/working/</code></pre>
+/docs/  &lt;- quarto에겐 필요없지만 소스를 커밋할땐 필요하다
+
+# ignore working
+*_w_.*    &lt;- 파일이름_w_.qmd 처럼 파일을 만들고 시작하면 노출되지 않는다 </code></pre>
 <p>커밋을 해준뒤 /working폴더에서 작성하면 추가가 되지 않는다.</p>
 <p>다음은 자동으로 배포하도록 작업해보자</p>
 
