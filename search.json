@@ -12,5 +12,12 @@
     "title": "Quarto Learn",
     "section": "",
     "text": "Quarto 는 Quarto(.qmd) 나 Jupyter notebook(.ipynb) 으로 만든 페이지를 HTML,DOCX,MS WORD, ePub, PDF등으로 만들고 퍼블리시 할수있도록 해주는 서비스이다.\nJupiter lab등으로 개발테스트등을 하면서 만들어낸 문서를 자연스럽게 HTML로 만들어 블로깅이나 노션질을 하기 좋을것 같아서 관심이 가는 서비스이다. 그러므로? 시작한다\n\n\n\nhttps://quarto.org/docs/get-started/ 에서 quarto를 다운받아 설치한다. 나는 WSL환경이므로 Ubuntu를 받아서 설치하였다\n\n\n# 다운로드 파일\n# !wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.2.269/quarto-1.2.269-linux-amd64.deb\n\n# 설치진행\n# !sudo dpkg -i quarto-1.2.269-linux-amd64.deb\n\n\n설치를 완료한뒤 jupyter notebook이나 jupyer lab, vscode 등으로 노트문서를 만든다. 여기서는 현재 보고있는 문서를 그렇게 만들었다.\n만들어진 문서를 미리 확인해 볼수 있도록 quarto preview {파일명}명령어로 확인해본다.\n\n\n간단하게 브라우저에서 볼수 있도록 실행된다. http://localhost:3936에 들어가보면\n\n잘나오는것을 알 수있다.\n확인이 되었으니 이제 실제 파일로 렌더해야된다 이때는 quarto render {파일명}를 이용하여 생성할수 있다. 우선 페이지 상단에 공식문서상의 YAML옵션을 추가한다.\n---\ntitle: \"Quarto Learn\"\nformat:\n  html:\n    code-fold: false\njupyter: python3\n---\n그리고 생성!\npandoc \n  to: html\n  output-file: QuartoStarter.html\n  standalone: true\n  section-divs: true\n  html-math-method: mathjax\n  wrap: none\n  default-image-extension: png\n  \nmetadata\n  document-css: false\n  link-citations: true\n  date-format: long\n  lang: en\n  title: Quarto Learn\n  jupyter: python3\n  \nOutput created: QuartoStarter.html\nQuartoStarter.html파일이 생성된것을 알수있다. 그외에 QuartoStarter_files란 폴더도 생겨나 있다. 폴더안엔 문서에 사용된 이미지나 화연을 꾸미기 위한 라이브러리들이 들어있다.\n목표는 노션에 html을 클리핑해서 넣는것이기 때문에 사실 여기까지도 필요없고 프리뷰에서 노션클리퍼를 사용하면 끝이다.\n끝인줄 알았지? 노션클리퍼는 localhost를 가져갈 수 없는것 같다. 아마도 노션서버에서 웹페이지를 호출해서 후처리를 가공하는거겠지.. 결국 다음이 필요하다!!\n다음은 우선 Quarto로 만든페이지를 웹블로그로 퍼블리시 하는 문서가 되겠네…"
+  },
+  {
+    "objectID": "working/Quarto-autopublish.html",
+    "href": "working/Quarto-autopublish.html",
+    "title": "",
+    "section": "",
+    "text": "작성중"
   }
 ]
