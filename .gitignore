@@ -1,0 +1,5 @@
+/.quarto/
+/docs/
+# remove working file
+*_w_.*
+
