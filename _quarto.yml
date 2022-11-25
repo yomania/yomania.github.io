@@ -1,5 +1,24 @@
 project:
   type: website
   output-dir: publish
+
 excute:
   freeze: auto
+
+format:
+  html:
+    theme: darkly
+    toc: true
+    toc-location: right
+
+website:
+  sidebar:
+    style: docked
+    search: true
+    contents:
+      - section: Quarto
+        contents:
+          - "python-notebook/quarto/1.Start-Quarto.ipynb"
+          - "python-notebook/quarto/2.QuartoWithGitPage.ipynb"
+          - "python-notebook/quarto/3.Quarto-CI-GitActions.ipynb"
+          - "python-notebook/quarto/4.Quarto-website.ipynb"

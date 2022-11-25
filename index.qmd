@@ -1,0 +1,8 @@
+---
+title: "Pages"
+listing: 
+  type: grid
+  contents:
+    - "python-notebook/quarto/*.ipynb"
+  sort: "filename"
+---
