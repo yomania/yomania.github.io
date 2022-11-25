@@ -1,0 +1,11 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/python-notebook/quarto/1.Start-Quarto.html",
+      "/python-notebook/quarto/2.QuartoWithGitPage.html",
+      "/python-notebook/quarto/3.Quarto-CI-GitActions.html",
+      "/python-notebook/quarto/4.Quarto-website.html"
+    ]
+  }
+]

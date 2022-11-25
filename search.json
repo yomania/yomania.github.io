@@ -1,23 +1,58 @@
 [
   {
-    "objectID": "python-notebook/quarto/Quarto-ci-gitaction.html",
-    "href": "python-notebook/quarto/Quarto-ci-gitaction.html",
-    "title": "",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Pages",
     "section": "",
-    "text": "이전 gitpage와 연결에서 .gitignore에 작성중인 파일은 repo에 올라가지 않게 설정하였는데. 이것은 quarto에겐 의미가 없다 로컬에서 publish 한 경우는 어차피 올라가기 때문이다.\n이제 git actions를 이용해서 repo에 적용하면 자동배포되는 CI를 만들어서 이 구성이 의미를 가지게 만들어보자\n\n\n\ngit actions를 위한 .github/workflows/publish.yml을 작성한다\ncommit & push 한다\ngit actions가 코드를 열심히 빌드하고 배포한다 (잘된다면…)\n짠 사이트가 잘나온다.\n\n\n폴더이름이 왜이리 긴가… git actions가 프로세스 명세를 읽어가는 폴더로 설정되어 있기 때문이다.\n\non:\n  workflow_dispatch:\n  push:\n    branches: ['동작할 브렌치명']\n\nname: ['액션명']\n\njobs:\n  build-deploy:\n    runs-on: ubuntu-latest\n    permissions:\n      contents: write\n    steps:\n      - name: Check out repository\n        uses: actions/checkout@v2\n\n      - name: Set up Quarto\n        uses: quarto-dev/quarto-actions/setup@v2\n\n      - name: Render and Publish\n        uses: quarto-dev/quarto-actions/publish@v2\n        with:\n          target: gh-pages\n        env:\n          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}\n우선 작업전에 _quarto.yml에 설정을 해주자\nexecute:\n  freeze: auto\n노트내에 실행이가능한 코드를 로컬에서만 실행하게 해주는 옵션이다. venv 나 renv로 액션내에서 빌드하게 할 수도 있다고 하지만 그건 좋지 않은 선택같다. freeze: auto가 설정되면 _freeze에 실행가능한 코드의 결과가 저장된다. _freeze폴더를 만들어 repo에 추가해준다.\n이제 작성완료한 이페이지랑 같이 배포해보자\n\n잘나온다 쉽네~ 다음은 지금은 페이지에 접근하면 첫페이지로 자동으로 이동하는데 이걸 수정이 가능한지 알아보자"
+    "text": "Quarto?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGithub pages로 Publish\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGit actions 으로 자동배포\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n홈페이지 설정\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "python-notebook/quarto/Quarto-Gitpage.html",
-    "href": "python-notebook/quarto/Quarto-Gitpage.html",
-    "title": "",
+    "objectID": "python-notebook/quarto/2.QuartoWithGitPage.html",
+    "href": "python-notebook/quarto/2.QuartoWithGitPage.html",
+    "title": "Github pages로 Publish",
     "section": "",
     "text": "quarto로 문서를 만들고 미리보고 렌더하는거 까지 해본뒤 파일을 노션으로 웹클리퍼로 옮기려 했으나 잘안됬다. html을 노션에 넣는 방법도 있지만 귀차니즘은 그것도 자동화 하고 싶다. (이거 귀차니즘이 맞는건가…)\nQuarto의 가이드문서 를 보면 다양한 문서 퍼블리시 방법이 있는데 목적은 노션페이지를 만드는것이기때문에 github page를 이용한 Documents publish를 선택했다.\n문서의 순서를 따라가자 1. 만든문서를 로컬의 배포폴더로 렌더링하고, 해당폴더를 github repo와 연결시킨다. 2. quarto publish 를 이용하여 해당 폴더를 퍼블리시한다. 3. Github Action을 이용해서 파일을 수정하고 퍼블리시 할때마다 자동으로 갱신되도록한다. 4. (내목표) 노션클리핑으로 해당 문서를 클리핑해서 문서에 붙여넣는다.\nquatro문서를 따라 _quarto.yml로 output폴더를 만드는 구성을 생성한다.\n_quarto.yml\nproject:\n  type: website\n  output-dir: docs\n폴더명이 꼭 docs일 필요는 없다 해당폴더엔 quarto가 직접만든 배포 파일들을 모아둘뿐이다.\n그리고 루트에 .nojekyll파일을 생성한다.\ngithub에 github page를 생성하고 (가이드) 작성중인 폴더에 git init, git remote add origin {repo url}을 통해 연결해준다\n이제 quarto publish를 실행하면 gh-pages브렌치로 자동으로 올라간다 페이지를 들어가 확인해보자 https://yomania.github.io\n잘나온다!!!\n추가적으로 작성중인 파일이 노출되는것을 피해주기위해서\n.gitignore를 생성해준다\n/.quarto/\n/docs/  <- quarto에겐 필요없지만 소스를 커밋할땐 필요하다\n\n# ignore working\n*_w_.*    <- 파일이름_w_.qmd 처럼 파일을 만들고 시작하면 노출되지 않는다 \n커밋을 해준뒤 /working폴더에서 작성하면 추가가 되지 않는다.\n다음은 자동으로 배포하도록 작업해보자"
   },
   {
-    "objectID": "python-notebook/quarto/QuartoStarter.html",
-    "href": "python-notebook/quarto/QuartoStarter.html",
-    "title": "Quarto Learn",
+    "objectID": "python-notebook/quarto/1.Start-Quarto.html",
+    "href": "python-notebook/quarto/1.Start-Quarto.html",
+    "title": "Quarto?",
     "section": "",
     "text": "Quarto 는 Quarto(.qmd) 나 Jupyter notebook(.ipynb) 으로 만든 페이지를 HTML,DOCX,MS WORD, ePub, PDF등으로 만들고 퍼블리시 할수있도록 해주는 서비스이다.\nJupiter lab등으로 개발테스트등을 하면서 만들어낸 문서를 자연스럽게 HTML로 만들어 블로깅이나 노션질을 하기 좋을것 같아서 관심이 가는 서비스이다. 그러므로? 시작한다\n\n\n\nhttps://quarto.org/docs/get-started/ 에서 quarto를 다운받아 설치한다. 나는 WSL환경이므로 Ubuntu를 받아서 설치하였다\n\n\n# 다운로드 파일\n# !wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.2.269/quarto-1.2.269-linux-amd64.deb\n\n# 설치진행\n# !sudo dpkg -i quarto-1.2.269-linux-amd64.deb\n\n\n설치를 완료한뒤 jupyter notebook이나 jupyer lab, vscode 등으로 노트문서를 만든다. 여기서는 현재 보고있는 문서를 그렇게 만들었다.\n만들어진 문서를 미리 확인해 볼수 있도록 quarto preview {파일명}명령어로 확인해본다.\n\n\n간단하게 브라우저에서 볼수 있도록 실행된다. http://localhost:3936에 들어가보면\n\n잘나오는것을 알 수있다.\n확인이 되었으니 이제 실제 파일로 렌더해야된다 이때는 quarto render {파일명}를 이용하여 생성할수 있다. 우선 페이지 상단에 공식문서상의 YAML옵션을 추가한다.\n---\ntitle: \"Quarto Learn\"\nformat:\n  html:\n    code-fold: false\njupyter: python3\n---\n그리고 생성!\npandoc \n  to: html\n  output-file: QuartoStarter.html\n  standalone: true\n  section-divs: true\n  html-math-method: mathjax\n  wrap: none\n  default-image-extension: png\n  \nmetadata\n  document-css: false\n  link-citations: true\n  date-format: long\n  lang: en\n  title: Quarto Learn\n  jupyter: python3\n  \nOutput created: QuartoStarter.html\nQuartoStarter.html파일이 생성된것을 알수있다. 그외에 QuartoStarter_files란 폴더도 생겨나 있다. 폴더안엔 문서에 사용된 이미지나 화연을 꾸미기 위한 라이브러리들이 들어있다.\n목표는 노션에 html을 클리핑해서 넣는것이기 때문에 사실 여기까지도 필요없고 프리뷰에서 노션클리퍼를 사용하면 끝이다.\n끝인줄 알았지? 노션클리퍼는 localhost를 가져갈 수 없는것 같다. 아마도 노션서버에서 웹페이지를 호출해서 후처리를 가공하는거겠지.. 결국 다음이 필요하다!!\n다음은 우선 Quarto로 만든페이지를 웹블로그로 퍼블리시 하는 문서가 되겠네…"
+  },
+  {
+    "objectID": "python-notebook/quarto/3.Quarto-CI-GitActions.html",
+    "href": "python-notebook/quarto/3.Quarto-CI-GitActions.html",
+    "title": "Git actions 으로 자동배포",
+    "section": "",
+    "text": "이전 gitpage와 연결에서 .gitignore에 작성중인 파일은 repo에 올라가지 않게 설정하였는데. 이것은 quarto에겐 의미가 없다 로컬에서 publish 한 경우는 어차피 올라가기 때문이다.\n이제 git actions를 이용해서 repo에 적용하면 자동배포되는 CI를 만들어서 이 구성이 의미를 가지게 만들어보자\n\n작업순서\n\ngit actions를 위한 .github/workflows/publish.yml을 작성한다\ncommit & push 한다\ngit actions가 코드를 열심히 빌드하고 배포한다 (잘된다면…)\n짠 사이트가 잘나온다.\n\n\n폴더이름이 왜이리 긴가… git actions가 프로세스 명세를 읽어가는 폴더로 설정되어 있기 때문이다.\n\non:\n  workflow_dispatch:\n  push:\n    branches: ['동작할 브렌치명']\n\nname: ['액션명']\n\njobs:\n  build-deploy:\n    runs-on: ubuntu-latest\n    permissions:\n      contents: write\n    steps:\n      - name: Check out repository\n        uses: actions/checkout@v2\n\n      - name: Set up Quarto\n        uses: quarto-dev/quarto-actions/setup@v2\n\n      - name: Render and Publish\n        uses: quarto-dev/quarto-actions/publish@v2\n        with:\n          target: gh-pages\n        env:\n          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}\n우선 작업전에 _quarto.yml에 설정을 해주자\nexecute:\n  freeze: auto\n노트내에 실행이가능한 코드를 로컬에서만 실행하게 해주는 옵션이다. venv 나 renv로 액션내에서 빌드하게 할 수도 있다고 하지만 그건 좋지 않은 선택같다. freeze: auto가 설정되면 _freeze에 실행가능한 코드의 결과가 저장된다. _freeze폴더를 만들어 repo에 추가해준다.\n이제 작성완료한 이페이지랑 같이 배포해보자\n\n잘나온다 쉽네~ 다음은 지금은 페이지에 접근하면 첫페이지로 자동으로 이동하는데 이걸 수정이 가능한지 알아보자"
+  },
+  {
+    "objectID": "python-notebook/quarto/4.Quarto-website.html",
+    "href": "python-notebook/quarto/4.Quarto-website.html",
+    "title": "홈페이지 설정",
+    "section": "",
+    "text": "페이지를 자동으로 빌드하고 개시하게 되었지만 부족한 부분이 있다. 아직 홈페이지라고 말하기 어려운것이 홈페이지라면 첫페이지가 있고 각페이지에서 페이지들을 이동할만한 네비게이션이 필요한법!!\n시작해보자"
+  },
+  {
+    "objectID": "python-notebook/quarto/4.Quarto-website.html#quarto.xml에-페이지-구조설정",
+    "href": "python-notebook/quarto/4.Quarto-website.html#quarto.xml에-페이지-구조설정",
+    "title": "홈페이지 설정",
+    "section": "_quarto.xml에 페이지 구조설정",
+    "text": "_quarto.xml에 페이지 구조설정\nquarto에 내 홈페이지 어떤 모양을 띄게될지 설정하는 옵션이 있다. 홈페이지의 테마를 설정할수있고 Bootswatch테마중 골라서 설정한다.\nformat:\n  html:\n    theme: darkly\nNavigation설정을 참고하여 네비게이션 바를 만들자 사이드바 네비바 다양하게 제공한다. 자동 생성도 해주지만 중구난방으로 나오기 때문에 하나씩 설정해주자\nwebsite:\n  sidebar:\n    style: docked\n    search: true\n    contents:\n      - section: Quarto\n        contents:\n          - \"python-notebook/quarto/1.Start-Quarto.ipynb\"\n          - \"python-notebook/quarto/2.QuartoWithGitPage.ipynb\"\n          - \"python-notebook/quarto/3.Quarto-CI-GitActions.ipynb\"\n          - \"python-notebook/quarto/4.Quarto-website.ipynb\""
+  },
+  {
+    "objectID": "python-notebook/quarto/4.Quarto-website.html#index.qmd를-작성한다",
+    "href": "python-notebook/quarto/4.Quarto-website.html#index.qmd를-작성한다",
+    "title": "홈페이지 설정",
+    "section": "index.qmd를 작성한다",
+    "text": "index.qmd를 작성한다\n머리글을 쓸게 없는데 메인페이지를 뭘로 해야 하나 했는데 컨텐츠 리스팅을 해줄수 있어서 적용하였다 가이드\n---\ntitle: \"Pages\"\nlisting: \n  type: grid\n  contents:\n    - \"python-notebook/quarto/*.ipynb\"\n  sort: \"filename\"\n---\n리스팅은 Sort기능이 있다… 네비게이션도 언젠가는 지원해 줄지도 모르겠다.\n작성이 끝났으니 화면을 한번볼까…\n\n깔끔하게 잘 뽑혔다.. 좋다!!"
+  },
+  {
+    "objectID": "python-notebook/quarto/4.Quarto-website.html#작업완료",
+    "href": "python-notebook/quarto/4.Quarto-website.html#작업완료",
+    "title": "홈페이지 설정",
+    "section": "작업완료!",
+    "text": "작업완료!\n이로서 4단계에 걸친 홈페이지 만들기 여정이 어느정도 끝났다 이다음부터는 이쁘게 꾸밀일만 남은거 같다 (미적감각이 없어서 못할것 같지만…) 정말 홈페이지 만들기 편하고 좋은 세상이 된거 같다. 자동화란 좋은것인듯…"
   }
 ]

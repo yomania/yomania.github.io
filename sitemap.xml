@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://github.com/yomania/yomania.github.io/python-notebook/quarto/Quarto-ci-gitaction.html</loc>
-    <lastmod>2022-11-25T11:20:18.994Z</lastmod>
+    <loc>https://github.com/yomania/yomania.github.io/index.html</loc>
+    <lastmod>2022-11-25T13:17:02.778Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/yomania/yomania.github.io/python-notebook/quarto/Quarto-Gitpage.html</loc>
-    <lastmod>2022-11-25T11:20:19.646Z</lastmod>
+    <loc>https://github.com/yomania/yomania.github.io/python-notebook/quarto/2.QuartoWithGitPage.html</loc>
+    <lastmod>2022-11-25T13:17:03.410Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/yomania/yomania.github.io/python-notebook/quarto/QuartoStarter.html</loc>
-    <lastmod>2022-11-25T11:20:19.970Z</lastmod>
+    <loc>https://github.com/yomania/yomania.github.io/python-notebook/quarto/1.Start-Quarto.html</loc>
+    <lastmod>2022-11-25T13:17:03.722Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/yomania/yomania.github.io/python-notebook/quarto/3.Quarto-CI-GitActions.html</loc>
+    <lastmod>2022-11-25T13:17:04.218Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/yomania/yomania.github.io/python-notebook/quarto/4.Quarto-website.html</loc>
+    <lastmod>2022-11-25T13:17:04.502Z</lastmod>
   </url>
 </urlset>
