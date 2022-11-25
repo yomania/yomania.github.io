@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "python-notebook/quarto/Quarto-ci-gitaction.html",
+    "href": "python-notebook/quarto/Quarto-ci-gitaction.html",
+    "title": "",
+    "section": "",
+    "text": "이전 gitpage와 연결에서 .gitignore에 작성중인 파일은 repo에 올라가지 않게 설정하였는데. 이것은 quarto에겐 의미가 없다 로컬에서 publish 한 경우는 어차피 올라가기 때문이다.\n이제 git actions를 이용해서 repo에 적용하면 자동배포되는 CI를 만들어서 이 구성이 의미를 가지게 만들어보자\n\n\n\ngit actions를 위한 .github/workflows/publish.yml을 작성한다\ncommit & push 한다\ngit actions가 코드를 열심히 빌드하고 배포한다 (잘된다면…)\n짠 사이트가 잘나온다.\n\n\n폴더이름이 왜이리 긴가… git actions가 프로세스 명세를 읽어가는 폴더로 설정되어 있기 때문이다.\n\non:\n  workflow_dispatch:\n  push:\n    branches: ['동작할 브렌치명']\n\nname: ['액션명']\n\njobs:\n  build-deploy:\n    runs-on: ubuntu-latest\n    permissions:\n      contents: write\n    steps:\n      - name: Check out repository\n        uses: actions/checkout@v2\n\n      - name: Set up Quarto\n        uses: quarto-dev/quarto-actions/setup@v2\n\n      - name: Render and Publish\n        uses: quarto-dev/quarto-actions/publish@v2\n        with:\n          target: gh-pages\n        env:\n          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}\n우선 작업전에 _quarto.yml에 설정을 해주자\nexecute:\n  freeze: auto\n노트내에 실행이가능한 코드를 로컬에서만 실행하게 해주는 옵션이다. venv 나 renv로 액션내에서 빌드하게 할 수도 있다고 하지만 그건 좋지 않은 선택같다. freeze: auto가 설정되면 _freeze에 실행가능한 코드의 결과가 저장된다. _freeze폴더를 만들어 repo에 추가해준다.\n이제 작성완료한 이페이지랑 같이 배포해보자"
+  },
+  {
     "objectID": "python-notebook/quarto/Quarto-Gitpage.html",
     "href": "python-notebook/quarto/Quarto-Gitpage.html",
     "title": "",
