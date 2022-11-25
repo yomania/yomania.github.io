@@ -1,3 +1,5 @@
 project:
   type: website
   output-dir: publish
+excute:
+  freeze: auto
