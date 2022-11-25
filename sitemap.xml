@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://yomania.github.io/python-notebook/quarto/Quarto-ci-gitaction_w_.html</loc>
+    <lastmod>2022-11-25T09:57:03.113Z</lastmod>
+  </url>
+  <url>
     <loc>https://yomania.github.io/python-notebook/quarto/Quarto-Gitpage.html</loc>
-    <lastmod>2022-11-18T11:09:09.908Z</lastmod>
+    <lastmod>2022-11-25T09:57:03.323Z</lastmod>
   </url>
   <url>
     <loc>https://yomania.github.io/python-notebook/quarto/QuartoStarter.html</loc>
-    <lastmod>2022-11-18T11:09:10.128Z</lastmod>
+    <lastmod>2022-11-25T09:57:03.533Z</lastmod>
   </url>
 </urlset>
